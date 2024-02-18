@@ -6,6 +6,7 @@ import { store } from "./app/store"
 import "./index.css"
 import { ThemeProvider } from '@mui/material/styles';
 import theme from "./theme"
+import Layout from "./layout"
 
 const container = document.getElementById("root")
 
@@ -16,7 +17,9 @@ if (container) {
     <React.StrictMode>
       <Provider store={store}>
         <ThemeProvider theme={theme}>
-          <App />
+          <Layout>
+            <App />
+          </Layout>
         </ThemeProvider>
       </Provider>
     </React.StrictMode>,
