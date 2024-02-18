@@ -10,7 +10,7 @@ const Layout = (props: ILayout) => {
     const { children } = props
 
     return (
-        <Stack justifyContent='center' alignItems='center' sx={{ height: '100vh', background: 'gray' }}>
+        <Stack justifyContent='center' alignItems='center' sx={{ height: '100vh', background: '#fafafa' }}>
             {children}
         </Stack>
     )

@@ -24,7 +24,7 @@ const App = () => {
         </Route>
 
         <Route path='/login' element={<Login />} />
-        <Route path='/registery' element={<Register />} />
+        <Route path='/register' element={<Register />} />
         <Route path='/otp' element={<GetOtp />} />
         <Route path='/revoke' element={<Renew />} />
 
