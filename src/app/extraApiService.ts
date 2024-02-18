@@ -2,8 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { RootState } from './store'
 
 export interface User {
-    first_name: string
-    last_name: string
+    name: string
+    email: string
 }
 
 export interface UserResponse {
@@ -12,7 +12,7 @@ export interface UserResponse {
 }
 
 export interface LoginRequest {
-    username: string
+    email: string
     password: string
 }
 

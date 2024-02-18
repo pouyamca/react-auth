@@ -3,16 +3,40 @@ import { useState } from "react"
 import { LoginValidationSchema } from "./validators";
 import { ILoginForm } from "./model";
 import { Box, Button, Checkbox, Stack, TextField, Typography } from "@mui/material";
+import { LoginRequest, User, useLoginMutation } from "../../app/extraApiService";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setCredentials } from "./login-slice";
 
 
 const Login = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const [login, { isLoading }] = useLoginMutation()
+
+    const submittingLogin = async (input: LoginRequest) => {
+        try {
+            const user = await login({ email: input?.email, password: input?.password }).unwrap()
+            dispatch(setCredentials(user))
+            navigate('/')
+        } catch (err) {
+            console.log({
+                status: 'error',
+                title: 'Error',
+                description: 'Oh no, there was an error!',
+                isClosable: true,
+            })
+        }
+    }
+
     const loginForm = useFormik<ILoginForm>({
         initialValues: {
             email: '',
             password: ''
         },
         validationSchema: LoginValidationSchema,
-        onSubmit: (input) => { }
+        onSubmit: (input) => { submittingLogin }
     });
 
 
@@ -66,7 +90,7 @@ const Login = () => {
                         </Button>
 
                     </Stack>
-                    <Button color="primary" variant="contained" fullWidth type="submit">
+                    <Button color="primary" variant="contained" fullWidth type="submit"  >
                         Sign in
                     </Button>
                     <Button variant="outlined">
